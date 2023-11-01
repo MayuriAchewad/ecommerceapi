@@ -40,7 +40,12 @@ app.post("/update", async(req,res)=>{
 
 app.post("/delete",async(req,res)=>{
     const result= await productModel.deleteOne(req.body)
-    res.send("delete cart")
+    res.send("deleted products from product list")
+})
+
+app.post("/deletecart",async(req,res)=>{
+    const result= await cartModel.deleteOne(req.body)
+    res.send("deleted products from cart list")
 })
 
 app.listen(1032,()=>{
