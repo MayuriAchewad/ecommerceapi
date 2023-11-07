@@ -6,7 +6,8 @@ const cartModel= mongoose.model("carts",{
     title:{type:String},
     description:{type:String},
     category:{type:String},
-    rating:{type:Number}
+    rating:{type:Number},
+    quantity:{type:Number},
 })
 
 module.exports=cartModel;

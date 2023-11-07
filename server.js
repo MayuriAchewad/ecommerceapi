@@ -1,11 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const session = require('express-session')
 const mongoose = require("mongoose");
 const productModel = require("./model/productModel");
 const cartModel = require("./model/cartModel");
 const app = express();
 app.use(cors())
 app.use(express.json());
+//Set up Session Middleware
+app.use(session({
+	secret : '1234567890abcdefghijklmnopqrstuvwxyz',
+	resave : false,
+	saveUninitialized : true,
+	cookie : { secure : false }
+}));
 
 mongoose.connect("mongodb://127.0.0.1:27017/ecommerce").then(()=>{
     console.log("mongoose is connected");
@@ -30,6 +38,7 @@ app.post("/addproduct",async(req,res)=>{
 app.post("/addcart",async(req,res)=>{
     const result = new cartModel(req.body);
     await result.save()
+    
     res.send("successfully added new cart")
 })
 
